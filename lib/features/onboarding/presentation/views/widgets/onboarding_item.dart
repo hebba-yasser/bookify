@@ -29,12 +29,10 @@ class OnboardingItem extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16),
+        Expanded(
           child: Image.asset(
             model.imagePath,
             fit: BoxFit.contain,
-            height: MediaQuery.sizeOf(context).height * .40,
           ),
         ),
         onboardingTextItem(model: model),
