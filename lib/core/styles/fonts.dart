@@ -49,13 +49,6 @@ class AppFonts {
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
-
-  static TextStyle accentBody24 = const TextStyle(
-    fontFamily: 'Montserrat',
-    fontSize: 24,
-    fontWeight: FontWeight.normal,
-    color: Colors.white,
-  );
   static TextStyle accentBody22 = const TextStyle(
     fontFamily: 'Montserrat',
     fontSize: 22,
@@ -66,6 +59,6 @@ class AppFonts {
     fontFamily: 'Montserrat',
     fontSize: 18,
     fontWeight: FontWeight.normal,
-    color: Colors.black45,
+    color: Colors.black,
   );
 }
