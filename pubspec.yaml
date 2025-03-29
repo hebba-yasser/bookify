@@ -43,8 +43,8 @@ dependencies:
   device_preview: ^1.2.0
   flutter_launcher_icons: "^0.13.1"
   conditional_builder_null_safety: ^0.0.6
-  percent_indicator: ^4.2.3
-
+  percent_indicator: ^4.2.4
+  font_awesome_flutter: ^10.8.0
 
 dev_dependencies:
   flutter_test:

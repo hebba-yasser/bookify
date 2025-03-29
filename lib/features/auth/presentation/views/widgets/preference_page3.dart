@@ -1,3 +1,4 @@
+import 'package:bookify/core/utils/functions/Navigaor_push.dart';
 import 'package:bookify/features/auth/presentation/views/widgets/preferences_rotated_image.dart';
 import 'package:bookify/features/auth/presentation/views/widgets/skip_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../../../constants.dart';
 import '../../../../../core/Views/widgets/custom_text_form_field.dart';
 import '../../../../../core/styles/fonts.dart';
+import '../../../../home/presentation/views/home_view.dart';
 import 'indicator.dart';
 
 class PreferencePage3 extends StatefulWidget {
@@ -28,7 +30,9 @@ class _PreferencePage3State extends State<PreferencePage3> {
           PreferencesRotatedImage(),
           SkipButton(
             selectedList: [],
-            onPressed: () {},
+            onPressed: () {
+              navigatorPush(context, HomeView());
+            },
           ),
           const Indicator(
             footer: 'Who are your favorite authors?',
