@@ -2,6 +2,8 @@ import 'package:bookify/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/styles/fonts.dart';
+import '../../../../../core/utils/functions/Navigator_to_auth.dart';
+import '../../../../auth/presentation/views/auth_view.dart';
 import '../../../data/models/onboarding_model.dart';
 import 'onbording_text_item.dart';
 
@@ -18,7 +20,7 @@ class OnboardingItem extends StatelessWidget {
           alignment: Alignment.topRight,
           child: TextButton(
             onPressed: () {
-              // navigatorPushAndRemove(context, const AuthView());
+              navigatorPushAndRemove(context, const AuthView());
             },
             child: Text(
               'Skip',

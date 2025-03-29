@@ -3,6 +3,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../core/styles/colors.dart';
+import '../../../../../core/utils/functions/Navigator_to_auth.dart';
+import '../../../../auth/presentation/views/auth_view.dart';
 import '../../../data/data_souces/onboarding_data.dart';
 import '../../manager/onboarding_cubit/onboarding_cubit.dart';
 
@@ -50,7 +52,7 @@ class OnboardingFloatingButtons extends StatelessWidget {
               if (cubit.currentPage < onboardingData.length - 1) {
                 cubit.nextPage(onboardingData.length);
               } else {
-                //    navigatorPushAndRemove(context, const AuthView());
+                navigatorPushAndRemove(context, const AuthView());
               }
             },
             child: const Icon(Icons.arrow_forward),
