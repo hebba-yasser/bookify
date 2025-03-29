@@ -24,7 +24,8 @@ class PreferencesShipsSection extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
               child: Wrap(
-                spacing: 5.0,
+                spacing: 6,
+                runSpacing: 6,
                 children: list.map((label) {
                   return FilterChip(
                     label: Text(
