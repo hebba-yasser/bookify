@@ -10,6 +10,7 @@ import '../../../../../core/views/widgets/custom_text_button.dart';
 import '../../../../../core/views/widgets/custom_text_form_field.dart';
 import '../../../../../core/views/widgets/header_desc_text.dart';
 import '../forget_password.dart';
+import '../preferences_view.dart';
 
 class SignInViewBody extends StatefulWidget {
   const SignInViewBody({Key? key}) : super(key: key);
@@ -85,7 +86,9 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               condition: true,
               builder: (context) => CustomButton(
                 text: 'Sign In',
-                onPressed: () {},
+                onPressed: () {
+                  navigatorPush(context, SignUpPreferencesView());
+                },
               ),
               fallback: (context) => customLoadingIndicator(),
             ),

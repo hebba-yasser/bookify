@@ -4,4 +4,5 @@ class AppAssets {
   static const onShelfBooks = 'assets/images/on_shelf_books.png';
   static const openBook = 'assets/images/open_book.png';
   static const authImg = 'assets/images/auth-img.png';
+  static const preferenceImg = 'assets/images/preference_book.png';
 }
