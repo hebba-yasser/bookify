@@ -1,3 +1,4 @@
+import 'package:bloc/bloc.dart';
 import 'package:bookify/features/home/presentation/views/home_view.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 import 'core/styles/colors.dart';
+import 'core/utils/bloc_observer.dart';
+import 'core/utils/cache_helper.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -12,7 +15,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  Bloc.observer = AppCubitObserver();
+  await CacheHelper.init();
   runApp(DevicePreview(
     enabled: true,
     builder: (context) => const Bookify(),
