@@ -20,9 +20,11 @@ class HomeViewBody extends StatelessWidget {
                 collectionTitle: 'New Arrivals',
               ),
               CircleCategoriesSection(
-                title: 'Top Authors',
+                collectionTitle: 'Top Authors',
               ),
-              RecentlyViewedSection(),
+              RecentlyViewedSection(
+                collectionTitle: 'Recently Viewed',
+              ),
             ],
           ),
         ),

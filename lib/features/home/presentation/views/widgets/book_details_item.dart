@@ -1,7 +1,7 @@
+import 'package:bookify/core/views/widgets/book_title_author.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/styles/colors.dart';
-import '../../../../../core/styles/fonts.dart';
 import '../../../../../core/utils/assets.dart';
 import 'custom_book_image.dart';
 
@@ -29,23 +29,7 @@ class BookDetailsItem extends StatelessWidget {
           const SizedBox(
             height: 6,
           ),
-          Column(
-            children: [
-              Text(
-                  ' titlccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccce',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppFonts.heading20),
-              Text(
-                'author Namecccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc      ',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: AppFonts.caption.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
+          BookTitleAuthor(),
         ],
       ),
     );
