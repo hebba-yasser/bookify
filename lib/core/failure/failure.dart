@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 abstract class Failure {
   final String errMessage;
 
@@ -99,3 +101,76 @@ class FirebaseFailure extends Failure {
   }
 }
 
+class ErrorMessages {
+  static const String connectionTimeout = 'Connection timeout with the server.';
+  static const String sendTimeout = 'Send timeout with the server.';
+  static const String receiveTimeout = 'Receive timeout with the server.';
+  static const String requestCancelled = 'Request to the server was cancelled.';
+  static const String noInternetConnection = 'No internet connection.';
+  static const String unexpectedError =
+      'Unexpected error occurred. Please try again.';
+  static const String connectionError =
+      'Connection error, please check your network.';
+  static const String notFound = 'Resource not found. Please try later.';
+  static const String internalServerError =
+      'Internal server error. Please try again later.';
+  static const String unauthorized = 'Authorization error.';
+  static const String unknownError = 'An unknown error occurred.';
+}
+
+class ServerFailure extends Failure {
+  ServerFailure(super.errMessage);
+
+  factory ServerFailure.fromDioException(DioException dioException) {
+    return ServerFailure(_mapDioExceptionToMessage(dioException));
+  }
+
+  static String _mapDioExceptionToMessage(DioException dioException) {
+    switch (dioException.type) {
+      case DioExceptionType.connectionTimeout:
+        return ErrorMessages.connectionTimeout;
+
+      case DioExceptionType.sendTimeout:
+        return ErrorMessages.sendTimeout;
+
+      case DioExceptionType.receiveTimeout:
+        return ErrorMessages.receiveTimeout;
+
+      case DioExceptionType.badResponse:
+        return _handleResponseError(
+            dioException.response?.statusCode, dioException.response?.data);
+
+      case DioExceptionType.cancel:
+        return ErrorMessages.requestCancelled;
+
+      case DioExceptionType.connectionError:
+        return dioException.message != null &&
+                dioException.message!.contains('SocketException')
+            ? ErrorMessages.noInternetConnection
+            : ErrorMessages.connectionError;
+
+      case DioExceptionType.unknown:
+      default:
+        return ErrorMessages.unexpectedError;
+    }
+  }
+
+  static String _handleResponseError(int? statusCode, dynamic response) {
+    if (statusCode == null) {
+      return ErrorMessages.unknownError;
+    }
+
+    switch (statusCode) {
+      case 400:
+      case 401:
+      case 403:
+        return response?['error']?['message'] ?? ErrorMessages.unauthorized;
+      case 404:
+        return ErrorMessages.notFound;
+      case 500:
+        return ErrorMessages.internalServerError;
+      default:
+        return ErrorMessages.unexpectedError;
+    }
+  }
+}
