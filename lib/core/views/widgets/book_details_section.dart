@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import 'book_info_section.dart';
-import 'book_title_author.dart';
 
 class BookDetailsSection extends StatelessWidget {
   const BookDetailsSection({super.key});
@@ -16,7 +15,7 @@ class BookDetailsSection extends StatelessWidget {
       child: ListView(
         physics: NeverScrollableScrollPhysics(),
         children: [
-          BookTitleAuthor(),
+          // BookTitleAuthor(),
           RatingSection(),
           BookInfoSection(),
           Padding(

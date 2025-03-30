@@ -1,14 +1,16 @@
 import 'package:bookify/core/views/widgets/book_title_author.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/data/models/book_model/book_model.dart';
 import '../../../../../core/styles/colors.dart';
-import '../../../../../core/utils/assets.dart';
 import '../../../../../core/views/widgets/custom_book_image.dart';
 
 class BookDetailsItem extends StatelessWidget {
   const BookDetailsItem({
     super.key,
+    required this.book,
   });
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +26,14 @@ class BookDetailsItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CustomBookImage(
-            image: AppAssets.onShelfBooks,
+            image: book.volumeInfo?.imageLinks?.thumbnail ?? ' ',
           ),
           const SizedBox(
             height: 6,
           ),
-          BookTitleAuthor(),
+          BookTitleAuthor(
+            book: book,
+          ),
         ],
       ),
     );

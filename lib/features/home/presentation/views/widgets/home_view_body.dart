@@ -1,9 +1,9 @@
 import 'package:bookify/features/home/presentation/views/widgets/recently_viewed_section.dart';
 import 'package:flutter/material.dart';
 
-import 'books_section.dart';
 import 'circle_categories_section.dart';
 import 'home_app_bar.dart';
+import 'new_arrival_bloc_builder.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -16,9 +16,7 @@ class HomeViewBody extends StatelessWidget {
           child: Column(
             children: [
               HomeAppBar(),
-              BooksSection(
-                collectionTitle: 'New Arrivals',
-              ),
+              NewArrivalBlocBuilder(),
               CircleCategoriesSection(
                 collectionTitle: 'Top Authors',
               ),

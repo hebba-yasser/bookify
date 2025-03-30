@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../styles/colors.dart';
 import '../../utils/assets.dart';
-import 'book_title_author.dart';
 import 'custom_book_image.dart';
 
 class BookListViewItem extends StatelessWidget {
@@ -27,9 +26,9 @@ class BookListViewItem extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            Expanded(
-              child: BookTitleAuthor(),
-            ),
+            // Expanded(
+            //   child: BookTitleAuthor(),
+            // ),
           ],
         ),
       ),

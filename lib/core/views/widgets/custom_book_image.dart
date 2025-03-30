@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 class CustomBookImage extends StatelessWidget {
   const CustomBookImage({Key? key, required this.image}) : super(key: key);
   final String image;
@@ -9,12 +9,12 @@ class CustomBookImage extends StatelessWidget {
       aspectRatio: 2.4 / 3,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
-        child: Image.asset(image, fit: BoxFit.fill),
-// CachedNetworkImage(
-// fit: BoxFit.fill,
-// imageUrl: image,
-// errorWidget: (context, url, error) => Icon(Icons.error),
-// ),
+        child:
+        CachedNetworkImage(
+          fit: BoxFit.fill,
+          imageUrl: image,
+          errorWidget: (context, url, error) => Icon(Icons.error),
+        ),
       ),
     );
   }
