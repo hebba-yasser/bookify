@@ -31,9 +31,35 @@ class HomeRepoImp implements HomeRepo {
     }
   }
 
+  //volumes?q=inauthor:"Colleen+Hoover"
   @override
-  Future<Either<Failure, List<BookModel>>> fetchBooksByAuthorName() {
-    // TODO: implement fetchBooksByAuthorName
-    throw UnimplementedError();
+  Future<Either<Failure, List<BookModel>>> fetchBooksByAuthorName(
+      {required String authorName}) async {
+    try {
+      final formattedName = formatAuthorNameForApi(authorName);
+      var data =
+          await apiService.get(endPoint: 'volumes?q=inauthor:"$formattedName"');
+      List<BookModel> books = [];
+      if (data.isNotEmpty) {
+        for (var item in data['items']) {
+          books.add(BookModel.fromJson(item));
+        }
+        return Right(books);
+      }
+      return Right(books);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(e));
+      }
+      return left(ServerFailure(e.toString()));
+    }
   }
+}
+
+String formatAuthorNameForApi(String authorName) {
+  // Convert to lowercase, replace spaces with '+', and remove special characters
+  return authorName
+      .toLowerCase()
+      .replaceAll(RegExp(r'[^\w\s]+'), '') // Remove punctuation
+      .replaceAll(RegExp(r'\s+'), '+'); // Replace spaces with +
 }

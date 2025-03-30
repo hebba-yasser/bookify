@@ -5,5 +5,6 @@ import '../../../../core/failure/failure.dart';
 
 abstract class HomeRepo {
   Future<Either<Failure, List<BookModel>>> fetchNewArrivalsBooks();
-  Future<Either<Failure, List<BookModel>>> fetchBooksByAuthorName();
+  Future<Either<Failure, List<BookModel>>> fetchBooksByAuthorName(
+      {required String authorName});
 }
