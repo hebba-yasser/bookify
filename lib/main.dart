@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:bookify/features/home/presentation/views/home_view.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'core/styles/colors.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/utils/cache_helper.dart';
 import 'core/utils/service_locator.dart';
+import 'features/auth/presentation/views/sign_up_view.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -65,7 +65,7 @@ class Bookify extends StatelessWidget {
           ),
         ),
       ),
-      home: const HomeView(),
+      home: const SignUpView(),
     );
   }
 }
