@@ -1,6 +1,8 @@
+import 'package:bookify/core/utils/functions/Navigaor_push.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/assets.dart';
+import '../author_books_view.dart';
 import 'circle_item.dart';
 
 class CircleCategoryListView extends StatelessWidget {
@@ -20,7 +22,9 @@ class CircleCategoryListView extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(left: 12, top: 5, bottom: 10),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                navigatorPush(context, AuthorBooksView());
+              },
               child: CircleItem(
                 title: 'auther name ',
                 imagePath: AppAssets.noImage,

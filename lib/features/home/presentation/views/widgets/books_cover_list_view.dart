@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/assets.dart';
-import 'custom_book_image.dart';
+import '../../../../../core/views/widgets/custom_book_image.dart';
 
 class BooksCoverListView extends StatelessWidget {
   const BooksCoverListView({
