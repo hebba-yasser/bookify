@@ -1,7 +1,8 @@
 import 'package:bookify/core/utils/functions/Navigaor_push.dart';
+import 'package:bookify/features/home/data/data_source/authors_data_source.dart';
+import 'package:bookify/features/home/data/models/author_model/author_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/assets.dart';
 import '../author_books_view.dart';
 import 'circle_item.dart';
 
@@ -16,18 +17,25 @@ class CircleCategoryListView extends StatelessWidget {
       height: 150,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
-        itemCount: 6,
+        itemCount: AuthorDataSource.popularAuthors.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(left: 12, top: 5, bottom: 10),
             child: GestureDetector(
               onTap: () {
-                navigatorPush(context, AuthorBooksView());
+                navigatorPush(
+                    context,
+                    AuthorBooksView(
+                      author: AuthorModel(
+                          authorName:
+                              AuthorDataSource.popularAuthors[index].authorName,
+                          authorImagePath: AuthorDataSource
+                              .popularAuthors[index].authorImagePath),
+                    ));
               },
               child: CircleItem(
-                title: 'auther name ',
-                imagePath: AppAssets.noImage,
+                author: AuthorDataSource.popularAuthors[index],
               ),
             ),
           );

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../data/models/book_model/book_model.dart';
 import '../../styles/fonts.dart';
-import '../../utils/assets.dart';
 import 'custom_book_image.dart';
 
 class SquareBookItem extends StatelessWidget {
   const SquareBookItem({
     super.key,
+    required this.book,
   });
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +22,15 @@ class SquareBookItem extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        SizedBox(height: 200, child: CustomBookImage(image: AppAssets.books)),
+        SizedBox(
+            height: 200,
+            child: CustomBookImage(
+                image: book.volumeInfo?.imageLinks?.thumbnail ?? ' ')),
         const SizedBox(
           height: 5,
         ),
         Text(
-          'book titledddddddddddddddddddddddddddddddddddddd',
+          book.volumeInfo?.title ?? 'No Title Available',
           style: AppFonts.bodyText16,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,

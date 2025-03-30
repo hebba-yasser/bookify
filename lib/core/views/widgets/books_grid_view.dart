@@ -1,13 +1,16 @@
 import 'package:bookify/core/views/widgets/square_book_item.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/models/book_model/book_model.dart';
 import '../../utils/functions/Navigaor_push.dart';
 import '../book_details_view.dart';
 
 class BooksGridView extends StatelessWidget {
   const BooksGridView({
     super.key,
+    required this.books,
   });
+  final List<BookModel> books;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +25,11 @@ class BooksGridView extends StatelessWidget {
         onTap: () {
           navigatorPush(context, BookDetailsView());
         },
-        child: SquareBookItem(),
+        child: SquareBookItem(
+          book: books[index],
+        ),
       ),
-      itemCount: 10,
+      itemCount: books.length,
     );
   }
 }

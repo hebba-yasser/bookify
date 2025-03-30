@@ -1,4 +1,3 @@
-import 'package:bookify/core/views/widgets/square_book_item.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/functions/Navigaor_push.dart';
@@ -21,10 +20,12 @@ class SquareBooksListView extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: GestureDetector(
-                onTap: () {
-                  navigatorPush(context, BookDetailsView());
-                },
-                child: SquareBookItem()),
+              onTap: () {
+                navigatorPush(context, BookDetailsView());
+              },
+              child: Text('data'),
+              // child: SquareBookItem()),
+            ),
           );
         },
       ),
