@@ -1,0 +1,103 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../../core/data/models/user_model.dart';
+import '../../../../core/failure/failure.dart';
+import '../../../../core/utils/cache_helper.dart';
+import 'auth_repo.dart';
+
+class AuthRepoImp implements AuthRepo {
+  @override
+  Future<Either<Failure, UserModel>> register({
+    required String email,
+    required String password,
+    required String name,
+    required String phone,
+  }) async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      if (userCredential.user != null) {
+        return await createUser(
+            email: email,
+            name: name,
+            phone: phone,
+            uId: userCredential.user!.uid);
+      }
+      return left(FirebaseFailure('User credential is null'));
+    } on FirebaseAuthException catch (e) {
+      return left(FirebaseFailure.fromFirebaseAuthException(e));
+    } catch (e) {
+      return left(FirebaseFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> createUser({
+    required String email,
+    required String uId,
+    required String name,
+    required String phone,
+  }) async {
+    try {
+      UserModel newUser = UserModel(
+        uId: uId,
+        name: name,
+        email: email,
+        phone: phone,
+        preferences: null,
+        recentSearch: null,
+        imgUrl: null,
+        likedBooks: null,
+      );
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uId)
+          .set(newUser.toMap());
+      await CacheHelper.setString(key: 'uid', value: uId);
+      return right(newUser);
+    } on FirebaseAuthException catch (e) {
+      return left(FirebaseFailure.fromFirebaseAuthException(e));
+    } catch (e) {
+      return left(FirebaseFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> changePassword(
+      {required String currentPassword, required String newPassword}) {
+    // TODO: implement changePassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, void>> forgotPassword({required String email}) {
+    // TODO: implement forgotPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> login(
+      {required String email, required String password}) {
+    // TODO: implement login
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, void>> logout() {
+    // TODO: implement logout
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> updateUserPreferences(
+      {required UserModel user}) {
+    // TODO: implement updateUserPreferences
+    throw UnimplementedError();
+  }
+}
