@@ -8,6 +8,7 @@ import 'constants.dart';
 import 'core/styles/colors.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/utils/cache_helper.dart';
+import 'core/utils/service_locator.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -17,6 +18,8 @@ Future<void> main() async {
   );
   Bloc.observer = AppCubitObserver();
   await CacheHelper.init();
+  setupServiceLocator();
+
   runApp(DevicePreview(
     enabled: true,
     builder: (context) => const Bookify(),
