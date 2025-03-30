@@ -23,9 +23,6 @@ class HomeViewBody extends StatelessWidget {
                 title: 'Top Authors',
               ),
               RecentlyViewedSection(),
-              CircleCategoriesSection(
-                title: 'Top genres',
-              ),
             ],
           ),
         ),
