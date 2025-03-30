@@ -19,7 +19,8 @@ Future<void> main() async {
   Bloc.observer = AppCubitObserver();
   await CacheHelper.init();
   setupServiceLocator();
-
+  uId = CacheHelper.getString(key: 'uid');
+  isLogged = CacheHelper.getBoolean(key: 'islogged') ?? false;
   runApp(DevicePreview(
     enabled: true,
     builder: (context) => const Bookify(),

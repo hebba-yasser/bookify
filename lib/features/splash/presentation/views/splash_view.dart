@@ -3,6 +3,7 @@ import 'package:bookify/features/splash/presentation/views/widgets/splash_view_b
 import 'package:flutter/material.dart';
 
 import '../../../../constants.dart';
+import '../../../home/presentation/views/home_view.dart';
 import '../../../onboarding/presentation/views/onboarding_view.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
         splash: const SplashViewBody(),
-        nextScreen: const OnboardingView(),
+        nextScreen: isLogged ? const HomeView() : const OnboardingView(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: kPrimaryColor,
         splashIconSize: 300,

@@ -16,3 +16,17 @@ final class AuthRegisterFailure extends AuthState {
 }
 
 final class AuthTogglePasswordVisibility extends AuthState {}
+
+final class AuthLoginLoading extends AuthState {}
+
+final class AuthLoginSuccess extends AuthState {
+  final UserModel user;
+
+  AuthLoginSuccess(this.user);
+}
+
+final class AuthLoginFailure extends AuthState {
+  final String errMess;
+
+  AuthLoginFailure({required this.errMess});
+}

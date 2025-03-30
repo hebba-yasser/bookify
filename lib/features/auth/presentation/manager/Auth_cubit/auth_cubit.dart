@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/data/models/user_model.dart';
 import '../../../data/repos/auth_repo.dart';
 
 part 'auth_state.dart';
@@ -23,6 +24,22 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthRegisterFailure(errMess: failure.errMessage));
     }), ((success) {
       emit(AuthRegisterSuccess());
+    }));
+  }
+
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    emit(AuthLoginLoading());
+    var result = await authRepo.login(
+      email: email,
+      password: password,
+    );
+    result.fold(((failure) {
+      emit(AuthLoginFailure(errMess: failure.errMessage));
+    }), ((user) {
+      emit(AuthLoginSuccess(user));
     }));
   }
 
