@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../../constants.dart';
 import '../../../../core/data/models/user_model.dart';
 import '../../../../core/failure/failure.dart';
 import '../../../../core/utils/cache_helper.dart';
@@ -87,6 +88,39 @@ class AuthRepoImp implements AuthRepo {
     }
   }
 
+  Future<Either<Failure, UserModel>> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      var userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+
+      if (userCredential.user != null) {
+        DocumentSnapshot userData = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .get();
+        if (userData.exists) {
+          await CacheHelper.setString(
+              key: 'uid', value: userCredential.user!.uid);
+          await CacheHelper.setBoolean(key: 'islogged', value: true);
+          uId = CacheHelper.getString(key: 'uid');
+          isLogged = CacheHelper.getBoolean(key: 'islogged') ?? false;
+          return Right(
+              UserModel.fromMap(userData.data() as Map<String, dynamic>));
+        }
+      }
+      return left(FirebaseFailure('User credential is null'));
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        return left(FirebaseFailure.fromFirebaseAuthException(e));
+      } else {
+        return left(FirebaseFailure(e.toString()));
+      }
+    }
+  }
+
   @override
   Future<Either<Failure, void>> changePassword(
       {required String currentPassword, required String newPassword}) {
@@ -97,13 +131,6 @@ class AuthRepoImp implements AuthRepo {
   @override
   Future<Either<Failure, void>> forgotPassword({required String email}) {
     // TODO: implement forgotPassword
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, UserModel>> login(
-      {required String email, required String password}) {
-    // TODO: implement login
     throw UnimplementedError();
   }
 
