@@ -8,7 +8,7 @@ import 'core/styles/colors.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/utils/cache_helper.dart';
 import 'core/utils/service_locator.dart';
-import 'features/auth/presentation/views/sign_up_view.dart';
+import 'features/splash/presentation/views/splash_view.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -65,7 +65,7 @@ class Bookify extends StatelessWidget {
           ),
         ),
       ),
-      home: const SignUpView(),
+      home: const SplashScreen(),
     );
   }
 }

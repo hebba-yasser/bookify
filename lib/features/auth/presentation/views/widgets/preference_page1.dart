@@ -4,11 +4,14 @@ import 'package:bookify/features/auth/presentation/views/widgets/preference_page
 import 'package:flutter/material.dart';
 
 import '../../../../../core/data/data_sources/preferences_data_source.dart';
+import '../../manager/Preference_Cubit/sign_up_preference_cubit.dart';
 
 class PreferencePage1 extends StatelessWidget {
   const PreferencePage1({
     Key? key,
+    required this.cubit,
   }) : super(key: key);
+  final SignUpPreferenceCubit cubit;
   @override
   Widget build(
     BuildContext context,
@@ -16,13 +19,18 @@ class PreferencePage1 extends StatelessWidget {
     return Scaffold(
       body: PreferenceItem(
         onPressed: () {
-          navigatorPush(context, PreferencePage2());
+          navigatorPush(
+              context,
+              PreferencePage2(
+                cubit: cubit,
+              ));
         },
         footer: "What type of books do you love to read?",
         center: "50%",
         percent: .50,
         list: PreferencesDataSource.genres,
-        selectedList: [],
+        selectedList: cubit.genres,
+        cubit: cubit,
       ),
     );
   }

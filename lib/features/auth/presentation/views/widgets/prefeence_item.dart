@@ -3,6 +3,7 @@ import 'package:bookify/features/auth/presentation/views/widgets/preferences_shi
 import 'package:bookify/features/auth/presentation/views/widgets/skip_button.dart';
 import 'package:flutter/material.dart';
 
+import '../../manager/Preference_Cubit/sign_up_preference_cubit.dart';
 import 'indicator.dart';
 
 class PreferenceItem extends StatelessWidget {
@@ -14,6 +15,7 @@ class PreferenceItem extends StatelessWidget {
     required this.percent,
     required this.list,
     required this.selectedList,
+    required this.cubit,
   });
   final Function() onPressed;
   final String footer;
@@ -21,6 +23,7 @@ class PreferenceItem extends StatelessWidget {
   final double percent;
   final List<String> list;
   final List<String> selectedList;
+  final SignUpPreferenceCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +43,11 @@ class PreferenceItem extends StatelessWidget {
           top: 310,
           left: 0,
           right: 0,
-          child:
-              PreferencesShipsSection(list: list, selectedList: selectedList),
+          child: PreferencesShipsSection(
+            list: list,
+            selectedList: selectedList,
+            cubit: cubit,
+          ),
         ),
       ],
     );
