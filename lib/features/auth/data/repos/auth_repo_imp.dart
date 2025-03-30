@@ -68,6 +68,25 @@ class AuthRepoImp implements AuthRepo {
     }
   }
 
+  Future<Either<Failure, UserModel>> updateUserPreferences({
+    required UserModel user,
+  }) async {
+    try {
+      var uId = CacheHelper.getString(key: 'uid');
+      final userDoc = FirebaseFirestore.instance.collection('users').doc(uId);
+      await userDoc.update({'preferences': user.preferences?.toJson()});
+      final updatedData = await userDoc.get();
+      final updatedUser = UserModel.fromMap(updatedData.data()!);
+      return Right(updatedUser);
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        return left(FirebaseFailure.fromFirebaseAuthException(e));
+      } else {
+        return left(FirebaseFailure(e.toString()));
+      }
+    }
+  }
+
   @override
   Future<Either<Failure, void>> changePassword(
       {required String currentPassword, required String newPassword}) {
@@ -91,13 +110,6 @@ class AuthRepoImp implements AuthRepo {
   @override
   Future<Either<Failure, void>> logout() {
     // TODO: implement logout
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, UserModel>> updateUserPreferences(
-      {required UserModel user}) {
-    // TODO: implement updateUserPreferences
     throw UnimplementedError();
   }
 }
