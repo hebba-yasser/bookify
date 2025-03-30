@@ -1,5 +1,5 @@
-import 'package:bookify/core/data/models/preferences_model.dart';
-import 'package:bookify/core/data/models/small_book_model.dart';
+import 'package:bookify/core/data/models/user_model/preferences_model.dart';
+import 'package:bookify/core/data/models/user_model/small_book_model.dart';
 
 class UserModel {
   final String? uId;

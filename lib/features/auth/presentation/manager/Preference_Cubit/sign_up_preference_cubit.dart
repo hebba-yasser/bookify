@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:bookify/core/data/models/preferences_model.dart';
+import 'package:bookify/core/data/models/user_model/preferences_model.dart';
 import 'package:bookify/features/auth/presentation/manager/Preference_Cubit/sign_up_preference%20_state.dart';
 
-import '../../../../../core/data/models/user_model.dart';
+import '../../../../../core/data/models/user_model/user_model.dart';
 import '../../../data/repos/auth_repo.dart';
 
 class SignUpPreferenceCubit extends Cubit<SignUpPreferenceState> {

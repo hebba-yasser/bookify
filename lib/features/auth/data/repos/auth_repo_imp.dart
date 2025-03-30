@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../constants.dart';
-import '../../../../core/data/models/user_model.dart';
+import '../../../../core/data/models/user_model/user_model.dart';
 import '../../../../core/failure/failure.dart';
 import '../../../../core/utils/cache_helper.dart';
 import 'auth_repo.dart';

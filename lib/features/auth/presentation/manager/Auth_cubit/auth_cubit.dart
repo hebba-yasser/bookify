@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/data/models/user_model.dart';
+import '../../../../../core/data/models/user_model/user_model.dart';
 import '../../../data/repos/auth_repo.dart';
 
 part 'auth_state.dart';
