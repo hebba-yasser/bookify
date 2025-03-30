@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../data/models/book_model/book_model.dart';
 import '../../styles/colors.dart';
-import '../../utils/assets.dart';
+import 'book_title_author.dart';
 import 'custom_book_image.dart';
 
 class BookListViewItem extends StatelessWidget {
   const BookListViewItem({
     super.key,
+    required this.book,
   });
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +25,16 @@ class BookListViewItem extends StatelessWidget {
           children: [
             AspectRatio(
                 aspectRatio: 2.2 / 3,
-                child: CustomBookImage(image: AppAssets.books)),
+                child: CustomBookImage(
+                    image: book.volumeInfo?.imageLinks?.thumbnail ?? ' ')),
             const SizedBox(
               width: 10,
             ),
-            // Expanded(
-            //   child: BookTitleAuthor(),
-            // ),
+            Expanded(
+              child: BookTitleAuthor(
+                book: book,
+              ),
+            ),
           ],
         ),
       ),

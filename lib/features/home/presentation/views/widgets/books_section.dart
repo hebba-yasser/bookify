@@ -26,6 +26,7 @@ class BooksSection extends StatelessWidget {
               navigatorPush(
                   context,
                   BooksView(
+                    books: books,
                     title: collectionTitle,
                   ));
             },
