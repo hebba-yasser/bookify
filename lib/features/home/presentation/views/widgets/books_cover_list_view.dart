@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/assets.dart';
+import '../../../../../core/utils/functions/Navigaor_push.dart';
+import '../../../../../core/views/book_details_view.dart';
 import '../../../../../core/views/widgets/custom_book_image.dart';
 
 class BooksCoverListView extends StatelessWidget {
@@ -20,7 +22,9 @@ class BooksCoverListView extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(left: 12, top: 0, bottom: 0),
             child: GestureDetector(
-                onTap: () async {},
+                onTap: () {
+                  navigatorPush(context, BookDetailsView());
+                },
                 child: CustomBookImage(image: AppAssets.books)),
           );
         },

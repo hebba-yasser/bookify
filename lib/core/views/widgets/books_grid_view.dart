@@ -1,6 +1,9 @@
 import 'package:bookify/core/views/widgets/square_book_item.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/functions/Navigaor_push.dart';
+import '../book_details_view.dart';
+
 class BooksGridView extends StatelessWidget {
   const BooksGridView({
     super.key,
@@ -16,7 +19,9 @@ class BooksGridView extends StatelessWidget {
         mainAxisSpacing: 10,
       ),
       itemBuilder: (context, index) => GestureDetector(
-        onTap: () {},
+        onTap: () {
+          navigatorPush(context, BookDetailsView());
+        },
         child: SquareBookItem(),
       ),
       itemCount: 10,

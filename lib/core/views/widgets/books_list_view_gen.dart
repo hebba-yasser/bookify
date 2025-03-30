@@ -1,5 +1,7 @@
+import 'package:bookify/core/utils/functions/Navigaor_push.dart';
 import 'package:flutter/material.dart';
 
+import '../book_details_view.dart';
 import 'book_list_view_item.dart';
 
 class BooksListViewGen extends StatelessWidget {
@@ -16,7 +18,11 @@ class BooksListViewGen extends StatelessWidget {
           padding: const EdgeInsets.only(
             top: 8,
           ),
-          child: GestureDetector(onTap: () {}, child: BookListViewItem()),
+          child: GestureDetector(
+              onTap: () {
+                navigatorPush(context, BookDetailsView());
+              },
+              child: BookListViewItem()),
         ),
       ),
     );
