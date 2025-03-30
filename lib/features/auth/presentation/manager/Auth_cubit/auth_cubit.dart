@@ -43,6 +43,19 @@ class AuthCubit extends Cubit<AuthState> {
     }));
   }
 
+  Future<void> forgotPassword({required String email}) async {
+    emit(AuthResetPasswordLoading());
+    var result = await authRepo.forgotPassword(email: email);
+    result.fold(
+      (failure) {
+        emit(AuthResetPasswordFailure(errMess: failure.errMessage));
+      },
+      (r) {
+        emit(AuthResetPasswordSuccess());
+      },
+    );
+  }
+
   bool isHidden = true;
   IconData suffixIcon = Icons.visibility_off;
 
