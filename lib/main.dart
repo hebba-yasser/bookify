@@ -1,4 +1,5 @@
-import 'package:bookify/features/splash/presentation/views/splash_view.dart';
+import 'package:bookify/features/home/presentation/views/home_view.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,11 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const Bookify());
+
+  runApp(DevicePreview(
+    enabled: true,
+    builder: (context) => const Bookify(),
+  ));
 }
 
 class Bookify extends StatelessWidget {
@@ -20,6 +25,8 @@ class Bookify extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       color: kPrimaryColor,
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
@@ -51,7 +58,7 @@ class Bookify extends StatelessWidget {
           ),
         ),
       ),
-      home: const SplashScreen(),
+      home: const HomeView(),
     );
   }
 }
