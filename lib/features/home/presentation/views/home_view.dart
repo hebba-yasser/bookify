@@ -16,7 +16,7 @@ class HomeView extends StatelessWidget {
         body: BlocBuilder<BottomNavigationCubit, BottomNavigationState>(
           builder: (context, state) {
             final cubit = BlocProvider.of<BottomNavigationCubit>(context);
-            return cubit.bottomNavScreens[cubit.currentIndex];
+            return SafeArea(child: cubit.bottomNavScreens[cubit.currentIndex]);
           },
         ),
         bottomNavigationBar:
@@ -30,7 +30,10 @@ class HomeView extends StatelessWidget {
                 BottomNavigationBarItem(
                     icon: Icon(FontAwesomeIcons.bookOpenReader), label: 'Home'),
                 const BottomNavigationBarItem(
-                    icon: Icon(Icons.search), label: 'search'),
+                    icon: Icon(
+                      FontAwesomeIcons.magnifyingGlass,
+                    ),
+                    label: 'search'),
                 const BottomNavigationBarItem(
                     icon: Icon(FontAwesomeIcons.bookOpen), label: 'Library'),
                 const BottomNavigationBarItem(

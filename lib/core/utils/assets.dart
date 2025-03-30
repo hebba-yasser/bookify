@@ -5,4 +5,5 @@ class AppAssets {
   static const openBook = 'assets/images/open_book.png';
   static const authImg = 'assets/images/auth-img.png';
   static const preferenceImg = 'assets/images/preference_book.png';
+  static const noImage = 'assets/images/no_image.jpg';
 }
