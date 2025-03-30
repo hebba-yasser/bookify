@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../constants.dart';
-import '../../manager/bottom_navigation_cubit/bottom_navigation_cubit.dart';
+import '../manager/bottom_navigation_cubit/bottom_navigation_cubit.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

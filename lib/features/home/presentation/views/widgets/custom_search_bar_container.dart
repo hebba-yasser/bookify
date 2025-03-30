@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../core/styles/fonts.dart';
-import '../../../manager/bottom_navigation_cubit/bottom_navigation_cubit.dart';
+import '../../manager/bottom_navigation_cubit/bottom_navigation_cubit.dart';
 
 class CustomSearchBarContainer extends StatelessWidget {
   const CustomSearchBarContainer({
