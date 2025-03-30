@@ -20,7 +20,12 @@ class RecentlyViewedSection extends StatelessWidget {
           child: CollectionTitle(
             title: 'Recently viewed',
             onPressed: () {
-              navigatorPush(context, BooksView(title: collectionTitle));
+              navigatorPush(
+                  context,
+                  BooksView(
+                    title: collectionTitle,
+                    books: [],
+                  ));
             },
           ),
         ),

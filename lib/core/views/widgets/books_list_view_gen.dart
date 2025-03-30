@@ -23,7 +23,11 @@ class BooksListViewGen extends StatelessWidget {
           ),
           child: GestureDetector(
               onTap: () {
-                navigatorPush(context, BookDetailsView());
+                navigatorPush(
+                    context,
+                    BookDetailsView(
+                      bookId: books[index].id!,
+                    ));
               },
               child: BookListViewItem(
                 book: books[index],

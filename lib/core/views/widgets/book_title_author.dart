@@ -17,41 +17,21 @@ class BookTitleAuthor extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Column(
-          children: [
-            Text(
-              book.volumeInfo?.title ?? 'Title Not Available',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: AppFonts.bodyText16.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'By : ',
-                    style: AppFonts.caption.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: kPrimaryColor,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Text(
-                    book.volumeInfo!.authors?.first ?? 'No Name',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppFonts.caption.copyWith(
-                        fontWeight: FontWeight.w500, color: kPrimaryColor),
-                  ),
-                ),
-              ],
-            ),
-          ],
+        Text(
+          book.volumeInfo?.title ?? 'Title Not Available',
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: AppFonts.bodyText16.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
         ),
+        Text(
+          'By :${book.volumeInfo!.authors?.first ?? 'No Name'}',
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: AppFonts.caption
+              .copyWith(fontWeight: FontWeight.bold, color: kPrimaryColor),
+        )
       ],
     );
   }

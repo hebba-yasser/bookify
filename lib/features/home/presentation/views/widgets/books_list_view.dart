@@ -25,7 +25,11 @@ class BooksListView extends StatelessWidget {
             padding: const EdgeInsets.only(left: 12, top: 0, bottom: 0),
             child: GestureDetector(
                 onTap: () {
-                  navigatorPush(context, BookDetailsView());
+                  navigatorPush(
+                      context,
+                      BookDetailsView(
+                        bookId: books[index].id!,
+                      ));
                 },
                 child: BookDetailsItem(
                   book: books[index],

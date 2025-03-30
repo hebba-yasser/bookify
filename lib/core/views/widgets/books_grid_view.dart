@@ -23,7 +23,11 @@ class BooksGridView extends StatelessWidget {
       ),
       itemBuilder: (context, index) => GestureDetector(
         onTap: () {
-          navigatorPush(context, BookDetailsView());
+          navigatorPush(
+              context,
+              BookDetailsView(
+                bookId: books[index].id!,
+              ));
         },
         child: SquareBookItem(
           book: books[index],

@@ -6,16 +6,17 @@ import '../../styles/fonts.dart';
 class RatingSection extends StatelessWidget {
   const RatingSection({
     super.key,
+    required this.rating,
   });
-
+  final double rating;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        StarRating(rating: 10),
+        StarRating(rating: rating),
         Text(
-          '(3.5)',
+          '($rating)',
           style: AppFonts.bodyText16,
         ),
       ],
