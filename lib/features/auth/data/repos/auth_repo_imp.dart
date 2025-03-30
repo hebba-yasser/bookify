@@ -129,9 +129,17 @@ class AuthRepoImp implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> forgotPassword({required String email}) {
-    // TODO: implement forgotPassword
-    throw UnimplementedError();
+  Future<Either<Failure, void>> forgotPassword({required String email}) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return right(null);
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        return left(FirebaseFailure.fromFirebaseAuthException(e));
+      } else {
+        return left(FirebaseFailure(e.toString()));
+      }
+    }
   }
 
   @override
