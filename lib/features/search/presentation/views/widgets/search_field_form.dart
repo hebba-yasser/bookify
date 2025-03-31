@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../../constants.dart';
 import '../../../../../core/Views/widgets/custom_text_form_field.dart';
 import '../../../../../core/styles/fonts.dart';
+import '../../../../../core/utils/functions/Navigaor_push.dart';
+import '../search_result_view.dart';
 
 class SearchFieldForm extends StatefulWidget {
   const SearchFieldForm({Key? key}) : super(key: key);
@@ -25,6 +27,7 @@ class _SearchFieldFormState extends State<SearchFieldForm> {
         hintText: 'Search by book,author,genre...',
         hintStyle: AppFonts.caption,
         onFieldSubmitted: (newValue) {
+          navigatorPush(context, SearchResultView());
           // if (newValue!.isNotEmpty) {
           //   context
           //       .read<FetchRecipeByQueryCubit>()

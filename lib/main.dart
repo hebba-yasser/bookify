@@ -40,7 +40,7 @@ class Bookify extends StatelessWidget {
           create: (context) =>
               FetchNewArrivalBookCubit(getIt.get<HomeRepoImp>())
                 ..fetchNewArrivalBook(),
-        )
+        ),
       ],
       child: MaterialApp(
         locale: DevicePreview.locale(context),

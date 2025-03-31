@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/styles/fonts.dart';
+import '../../../../../core/styles/fonts.dart';
+import '../../../../../core/utils/functions/Navigaor_push.dart';
+import '../filter_view.dart';
 
 class FilterContainer extends StatelessWidget {
   const FilterContainer({
@@ -10,7 +12,9 @@ class FilterContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        navigatorPush(context, FilterView());
+      },
       child: Container(
         height: MediaQuery.of(context).size.height * .05,
         decoration: const BoxDecoration(
