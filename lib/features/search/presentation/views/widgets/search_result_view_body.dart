@@ -1,10 +1,13 @@
+import 'package:bookify/core/views/widgets/books_grid_view.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/data/models/book_model/book_model.dart';
 import '../../../../../core/views/widgets/custom_app_bar.dart';
 import 'filter_container.dart';
 
 class SearchResultViewBody extends StatelessWidget {
-  const SearchResultViewBody({Key? key}) : super(key: key);
+  const SearchResultViewBody({Key? key, required this.books}) : super(key: key);
+  final List<BookModel> books;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class SearchResultViewBody extends StatelessWidget {
       child: Column(
         children: [
           CustomAppBar(title: 'Search Results '),
-          //  const BooksListViewGen(),
+          Expanded(child: BooksGridView(books: books)),
           SizedBox(
             height: 10,
           ),

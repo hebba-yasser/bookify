@@ -31,7 +31,6 @@ class HomeRepoImp implements HomeRepo {
     }
   }
 
-  //volumes?q=inauthor:"Colleen+Hoover"
   @override
   Future<Either<Failure, List<BookModel>>> fetchBooksByAuthorName(
       {required String authorName}) async {
@@ -57,7 +56,6 @@ class HomeRepoImp implements HomeRepo {
 }
 
 String formatAuthorNameForApi(String authorName) {
-  // Convert to lowercase, replace spaces with '+', and remove special characters
   return authorName
       .toLowerCase()
       .replaceAll(RegExp(r'[^\w\s]+'), '') // Remove punctuation
