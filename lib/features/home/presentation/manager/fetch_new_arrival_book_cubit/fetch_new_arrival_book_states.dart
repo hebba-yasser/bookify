@@ -15,3 +15,12 @@ final class FetchNewArrivalBookFailure extends FetchNewArrivalBookStates {
   final String errMessage;
   FetchNewArrivalBookFailure(this.errMessage);
 }
+
+final class FetchNewArrivalBookLoadingPagination
+    extends FetchNewArrivalBookStates {}
+
+final class FetchNewArrivalBookFailurePagination
+    extends FetchNewArrivalBookStates {
+  final String errMessage;
+  FetchNewArrivalBookFailurePagination(this.errMessage);
+}
