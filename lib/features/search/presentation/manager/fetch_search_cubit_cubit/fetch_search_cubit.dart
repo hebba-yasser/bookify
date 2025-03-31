@@ -1,11 +1,15 @@
 import 'package:bloc/bloc.dart';
 
 import '../../../data/repos/search_repo.dart';
+import '../update_recent_search_cubit/update_recent_search_cubit.dart';
 import 'fetch_search_states.dart';
 
 class FetchSearchBookCubit extends Cubit<FetchSearchBookStates> {
-  FetchSearchBookCubit(this.searchRepo) : super(FetchSearchInitial());
+  FetchSearchBookCubit(this.searchRepo, this.updateRecentSearchCubit)
+      : super(FetchSearchInitial());
   final SearchRepo searchRepo;
+  final UpdateRecentSearchCubit updateRecentSearchCubit;
+
   Future<void> fetchSearchBook(
       {required String? query,
       String? language,
@@ -16,7 +20,8 @@ class FetchSearchBookCubit extends Cubit<FetchSearchBookStates> {
         query: query, language: language, orderBy: orderBy, filter: filter);
     result.fold((failure) {
       emit(FetchSearchFailure(failure.errMessage));
-    }, (books) {
+    }, (books) async {
+      await updateRecentSearchCubit.updateRecentSearch(search: query!);
       emit(FetchSearchSuccess(books));
     });
   }
