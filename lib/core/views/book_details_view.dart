@@ -24,7 +24,8 @@ class BookDetailsView extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               FetchSimilarBooksCubit(getIt.get<SharedRepoImp>())
-                ..FetchSimilarBooks(category: book.volumeInfo!.categories![0]),
+                ..FetchSimilarBooks(
+                    category: book.volumeInfo!.categories?[0] ?? 'general'),
         ),
       ],
       child: Scaffold(

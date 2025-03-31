@@ -63,7 +63,7 @@ class BookInfoSection extends StatelessWidget {
                 ),
               ],
             ),
-            if (bookModel.volumeInfo!.previewLink != null)
+            if (bookModel.volumeInfo?.previewLink != null)
               Column(
                 children: [
                   CircleAvatar(
