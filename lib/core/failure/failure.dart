@@ -174,3 +174,26 @@ class ServerFailure extends Failure {
     }
   }
 }
+
+class SupabaseFailure extends Failure {
+  SupabaseFailure(super.errMessage);
+
+  factory SupabaseFailure.fromSupabaseError(error) {
+    return SupabaseFailure(_mapSupabaseErrorToMessage(error));
+  }
+
+  static String _mapSupabaseErrorToMessage(error) {
+    switch (error.code) {
+      case '401':
+        return 'Authentication error. Please check your credentials or log in again.';
+      case '403':
+        return 'You do not have permission to access this resource.';
+      case '404':
+        return 'Resource not found.';
+      case '500':
+        return 'Internal server error. Please try again later.';
+      default:
+        return 'An unknown error occurred. Please try again later.';
+    }
+  }
+}
