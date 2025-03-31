@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'constants.dart';
+import 'core/cubits/user_data_cubit/user_data_cubit.dart';
+import 'core/data/repos/shared_repo_imp.dart';
 import 'core/styles/colors.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/utils/cache_helper.dart';
@@ -36,6 +38,11 @@ class Bookify extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => UserDataCubit(
+            getIt.get<SharedRepoImp>(),
+          )..fetchUserData(id: uId ?? ''),
+        ),
         BlocProvider(
           create: (context) =>
               FetchNewArrivalBookCubit(getIt.get<HomeRepoImp>())
