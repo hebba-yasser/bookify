@@ -26,7 +26,7 @@ class BooksGridView extends StatelessWidget {
           navigatorPush(
               context,
               BookDetailsView(
-                bookId: books[index].id!,
+                book: books[index],
               ));
         },
         child: SquareBookItem(

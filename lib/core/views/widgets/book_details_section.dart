@@ -1,5 +1,5 @@
 import 'package:bookify/core/views/widgets/rating_section.dart';
-import 'package:bookify/core/views/widgets/similar_books_section.dart';
+import 'package:bookify/core/views/widgets/similar_books_bloc_builder.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
@@ -9,6 +9,7 @@ import 'book_title_author.dart';
 
 class BookDetailsSection extends StatelessWidget {
   const BookDetailsSection({super.key, required this.bookModel});
+
   final BookModel bookModel;
 
   @override
@@ -33,7 +34,7 @@ class BookDetailsSection extends StatelessWidget {
                 thickness: 2,
               ),
             ),
-            SimilarBooksSection(),
+            SimilarBooksBlocBuilder(),
           ],
         ),
       ),
