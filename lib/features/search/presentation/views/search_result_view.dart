@@ -1,9 +1,10 @@
+import 'package:bookify/core/utils/functions/custom_loading_indicator.dart';
 import 'package:bookify/features/search/presentation/manager/fetch_search_cubit_cubit/fetch_search_states.dart';
 import 'package:bookify/features/search/presentation/views/widgets/search_result_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/utils/functions/custom_loading_indicator.dart';
+import '../../../../core/utils/functions/custom_show_toast.dart';
 import '../../../../core/utils/service_locator.dart';
 import '../../data/repos/search_repo_imp.dart';
 import '../manager/fetch_search_cubit_cubit/fetch_search_cubit.dart';
@@ -25,19 +26,31 @@ class SearchResultView extends StatelessWidget {
         BlocProvider(
           create: (context) => FetchSearchBookCubit(getIt.get<SearchRepoImp>(),
               context.read<UpdateRecentSearchCubit>())
-            ..fetchSearchBook(query: Query),
+            ..fetchSearchBook(query: Query, loadMore: false),
         ),
       ],
       child: Scaffold(
-        body: BlocBuilder<FetchSearchBookCubit, FetchSearchBookStates>(
+        body: BlocConsumer<FetchSearchBookCubit, FetchSearchBookStates>(
+          listener: (context, state) {
+            if (state is FetchSearchFailure) {
+              customShowToast(state.errMessage);
+            }
+            if (state is FetchSearchFailurePagination) {
+              customShowToast(state.errMessage);
+            }
+          },
           builder: (context, state) {
-            if (state is FetchSearchSuccess) {
+            if (state is FetchSearchSuccess ||
+                state is FetchSearchFailurePagination ||
+                state is FetchSearchLoadingPagination) {
               return SafeArea(
-                  child: SearchResultViewBody(
-                books: state.books,
-              ));
+                child: SearchResultViewBody(
+                  query: Query,
+                  books: context.read<FetchSearchBookCubit>().books,
+                ),
+              );
             } else if (state is FetchSearchFailure) {
-              return Text(state.errMessage);
+              return Text('state.errMessage');
             } else {
               return customLoadingIndicator();
             }

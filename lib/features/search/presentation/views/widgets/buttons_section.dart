@@ -47,7 +47,8 @@ class ButtonsSection extends StatelessWidget {
                       final searchCubit = context.read<FetchSearchBookCubit>();
 
                       searchCubit.fetchSearchBook(
-                        query: searchCubit.query, // Keep the existing query
+                        query:
+                            searchCubit.currentQuery, // Keep the existing query
                         language: filterCubit.selectedLanguageCode,
                         orderBy: filterCubit.selectedOrderBy,
                         filter: filterCubit.selectedBookType,
