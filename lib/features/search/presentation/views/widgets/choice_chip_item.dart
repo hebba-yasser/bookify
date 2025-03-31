@@ -2,51 +2,39 @@ import 'package:flutter/material.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../core/styles/colors.dart';
-import '../../../../../core/styles/fonts.dart';
 
 class ChoiceChipItem extends StatelessWidget {
-  ChoiceChipItem({
+  const ChoiceChipItem({
     required this.optionsList,
+    required this.onSelected,
+    required this.selectedValue,
     super.key,
-    this.selectedIndex,
   });
-  final List<String> optionsList;
 
-  int? selectedIndex;
+  final List<String> optionsList;
+  final Function(String) onSelected;
+  final String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
       spacing: 8,
-      children: List.generate(optionsList.length, (index) {
-        final bool isSelected = selectedIndex == index;
+      children: optionsList.map((option) {
+        final bool isSelected = selectedValue == option;
         return ChoiceChip(
-          label: Text(
-            optionsList[index],
-            style: TextStyle(
-                color: isSelected
-                    ? Colors.white
-                    : Colors.black), // White text when selected
-          ),
+          label: Text(option,
+              style:
+                  TextStyle(color: isSelected ? Colors.white : Colors.black)),
           selected: isSelected,
-          disabledColor: Colors.white,
           selectedColor: kPrimaryColor,
-          labelStyle: AppFonts.bodyText16,
-          shadowColor: Colors.white,
-          selectedShadowColor: Colors.white,
-          surfaceTintColor: Colors.white,
           backgroundColor: AppColors.lightGrey,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           showCheckmark: false,
           side: const BorderSide(width: 2, color: AppColors.lightGrey),
-          onSelected: (bool selected) {
-            // setState(() {
-            //   selectedIndex = selected ? index : null;
-            // });
-          },
+          onSelected: (_) => onSelected(option),
         );
-      }),
+      }).toList(),
     );
   }
 }

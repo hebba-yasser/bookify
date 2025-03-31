@@ -9,19 +9,21 @@ class FetchSearchBookCubit extends Cubit<FetchSearchBookStates> {
       : super(FetchSearchInitial());
   final SearchRepo searchRepo;
   final UpdateRecentSearchCubit updateRecentSearchCubit;
+  String query = '';
 
   Future<void> fetchSearchBook(
-      {required String? query,
+      {required String query,
       String? language,
       String? orderBy,
       String? filter}) async {
+    this.query = query;
     emit(FetchSearchLoading());
     var result = await searchRepo.SearchBooks(
         query: query, language: language, orderBy: orderBy, filter: filter);
     result.fold((failure) {
       emit(FetchSearchFailure(failure.errMessage));
     }, (books) async {
-      await updateRecentSearchCubit.updateRecentSearch(search: query!);
+      await updateRecentSearchCubit.updateRecentSearch(search: query);
       emit(FetchSearchSuccess(books));
     });
   }

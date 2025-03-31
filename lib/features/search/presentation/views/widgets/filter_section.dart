@@ -15,11 +15,8 @@ class FilterSection extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: FilterItem(
-              title: 'Order By ',
-              optionsList: [
-                "newest",
-                "relevance",
-              ],
+              title: 'Order By',
+              optionsList: ["newest", "relevance"],
             ),
           ),
           SliverToBoxAdapter(
@@ -35,7 +32,7 @@ class FilterSection extends StatelessWidget {
                 "free-ebooks",
                 "full",
                 "paid-ebooks",
-                "partial",
+                "partial"
               ],
             ),
           ),
@@ -46,7 +43,7 @@ class FilterSection extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: FilterItem(
-              title: 'language',
+              title: 'Language',
               optionsList: PreferencesDataSource.supportedLanguages
                   .map((lang) => lang["name"] as String)
                   .toList(),

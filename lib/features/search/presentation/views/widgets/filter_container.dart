@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/styles/fonts.dart';
 import '../../../../../core/utils/functions/Navigaor_push.dart';
+import '../../manager/fetch_search_cubit_cubit/fetch_search_cubit.dart';
 import '../filter_view.dart';
 
 class FilterContainer extends StatelessWidget {
@@ -13,7 +15,11 @@ class FilterContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        navigatorPush(context, FilterView());
+        navigatorPush(
+            context,
+            FilterView(
+              fetchSearchBookCubit: context.read<FetchSearchBookCubit>(),
+            ));
       },
       child: Container(
         height: MediaQuery.of(context).size.height * .05,

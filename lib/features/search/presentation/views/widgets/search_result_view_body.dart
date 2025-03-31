@@ -6,7 +6,10 @@ import '../../../../../core/views/widgets/custom_app_bar.dart';
 import 'filter_container.dart';
 
 class SearchResultViewBody extends StatelessWidget {
-  const SearchResultViewBody({Key? key, required this.books}) : super(key: key);
+  const SearchResultViewBody({
+    Key? key,
+    required this.books,
+  }) : super(key: key);
   final List<BookModel> books;
 
   @override
