@@ -26,8 +26,24 @@ class SharedRepoImp implements SharedRepo {
   }
 
   @override
-  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks(String? bookId) {
-    // TODO: implement fetchSimilarBooks
-    throw UnimplementedError();
+  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks(
+      {required String category}) async {
+    try {
+      var data = await apiService.get(
+          endPoint: 'volumes?q=subject:$category&filter=free-ebooks');
+      List<BookModel> books = [];
+      if (data.isNotEmpty) {
+        for (var item in data['items']) {
+          books.add(BookModel.fromJson(item));
+        }
+        return Right(books);
+      }
+      return Right(books);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(e));
+      }
+      return left(ServerFailure(e.toString()));
+    }
   }
 }
