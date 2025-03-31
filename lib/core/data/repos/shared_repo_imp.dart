@@ -1,10 +1,13 @@
 import 'package:bookify/core/data/models/book_model/book_model.dart';
 import 'package:bookify/core/data/repos/shared_repo.dart';
 import 'package:bookify/core/failure/failure.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../utils/api_service.dart';
+import '../models/user_model/user_model.dart';
 
 class SharedRepoImp implements SharedRepo {
   final ApiService apiService;
@@ -44,6 +47,28 @@ class SharedRepoImp implements SharedRepo {
         return left(ServerFailure.fromDioException(e));
       }
       return left(ServerFailure(e.toString()));
+    }
+  }
+
+  Stream<Either<Failure, UserModel>> fetchUserData(
+      {required String id}) async* {
+    try {
+      final userDoc =
+          FirebaseFirestore.instance.collection('users').doc(id).snapshots();
+      await for (var snapshot in userDoc) {
+        if (snapshot.exists) {
+          final userData = UserModel.fromMap(snapshot.data()!);
+          yield Right(userData);
+        } else {
+          yield Left(FirebaseFailure('There is no data available'));
+        }
+      }
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        yield Left(FirebaseFailure.fromFirebaseAuthException(e));
+      } else {
+        yield Left(FirebaseFailure(e.toString()));
+      }
     }
   }
 }
