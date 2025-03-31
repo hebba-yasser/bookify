@@ -9,6 +9,7 @@ abstract class SearchRepo {
     String? language,
     String? orderBy,
     String? filter,
+    int pageNumber = 0,
   });
   Future<Either<Failure, void>> updateUserSearchList({
     required String search,

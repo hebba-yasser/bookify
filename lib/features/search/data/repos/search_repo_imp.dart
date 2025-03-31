@@ -17,10 +17,13 @@ class SearchRepoImp implements SearchRepo {
       {required String? query,
       String? language,
       String? orderBy,
-      String? filter}) async {
+      String? filter,
+      int pageNumber = 0}) async {
     try {
+      print(pageNumber);
       Map<String, dynamic> queryParams = {
         "q": query,
+        if (pageNumber > 0) "startIndex": pageNumber * 10,
         if (language != null) "langRestrict": language,
         if (orderBy != null) "orderBy": orderBy,
         if (filter != null) "filter": filter,
