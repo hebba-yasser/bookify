@@ -7,5 +7,5 @@ abstract class HomeRepo {
   Future<Either<Failure, List<BookModel>>> fetchNewArrivalsBooks(
       {int pageNumber = 0});
   Future<Either<Failure, List<BookModel>>> fetchBooksByAuthorName(
-      {required String authorName});
+      {required String authorName, int pageNumber = 0});
 }

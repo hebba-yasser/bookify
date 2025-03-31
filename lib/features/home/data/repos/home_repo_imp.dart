@@ -34,11 +34,12 @@ class HomeRepoImp implements HomeRepo {
 
   @override
   Future<Either<Failure, List<BookModel>>> fetchBooksByAuthorName(
-      {required String authorName}) async {
+      {required String authorName, int pageNumber = 0}) async {
     try {
       final formattedName = formatAuthorNameForApi(authorName);
-      var data =
-          await apiService.get(endPoint: 'volumes?q=inauthor:"$formattedName"');
+      var data = await apiService.get(
+          endPoint:
+              'volumes?q=inauthor:"$formattedName"&startIndex=${pageNumber * 10}');
       List<BookModel> books = [];
       if (data.isNotEmpty) {
         for (var item in data['items']) {
