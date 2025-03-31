@@ -1,9 +1,11 @@
 import 'package:bookify/core/utils/functions/Navigaor_push.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/data/models/book_model/book_model.dart';
 import '../../../../../core/views/books_view.dart';
 import '../../../../../core/views/widgets/collection_title.dart';
+import '../../manager/fetch_new_arrival_book_cubit/fetch_new_arrival_book_cubit.dart';
 import 'books_list_view.dart';
 
 class BooksSection extends StatelessWidget {
@@ -28,6 +30,8 @@ class BooksSection extends StatelessWidget {
                   BooksView(
                     books: books,
                     title: collectionTitle,
+                    fetchNewArrivalBookCubit:
+                        context.read<FetchNewArrivalBookCubit>(),
                   ));
             },
           ),

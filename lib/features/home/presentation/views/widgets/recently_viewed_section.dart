@@ -1,7 +1,5 @@
-import 'package:bookify/core/views/books_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/functions/Navigaor_push.dart';
 import '../../../../../core/views/widgets/collection_title.dart';
 import 'books_cover_list_view.dart';
 
@@ -19,14 +17,7 @@ class RecentlyViewedSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
           child: CollectionTitle(
             title: 'Recently viewed',
-            onPressed: () {
-              navigatorPush(
-                  context,
-                  BooksView(
-                    title: collectionTitle,
-                    books: [],
-                  ));
-            },
+            onPressed: () {},
           ),
         ),
         BooksCoverListView(),
