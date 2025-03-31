@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 
 import '../../features/auth/data/repos/auth_repo_imp.dart';
 import '../../features/home/data/repos/home_repo_imp.dart';
+import '../../features/profile/data/repos/profile_repos_imp.dart';
 import '../../features/search/data/repos/search_repo_imp.dart';
 import '../data/repos/shared_repo_imp.dart';
 
@@ -16,4 +17,8 @@ void setupServiceLocator() {
       .registerSingleton<SharedRepoImp>(SharedRepoImp(getIt.get<ApiService>()));
   getIt
       .registerSingleton<SearchRepoImp>(SearchRepoImp(getIt.get<ApiService>()));
+
+  getIt.registerSingleton<ProfileReposImp>(ProfileReposImp(
+    getIt.get<AuthRepoImp>(),
+  ));
 }
