@@ -6,5 +6,6 @@ import '../../failure/failure.dart';
 abstract class SharedRepo {
   Future<Either<Failure, BookModel>> fetchBookById({required String id});
 
-  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks(String? bookId);
+  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks(
+      {required String category});
 }
