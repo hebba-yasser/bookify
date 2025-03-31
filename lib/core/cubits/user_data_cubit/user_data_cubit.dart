@@ -9,13 +9,20 @@ class UserDataCubit extends Cubit<UserDataState> {
   UserDataCubit(this.sharedRepos) : super(UserDataInitial());
 
   void fetchUserData({required String id}) {
-    emit(UserDataLoading());
+    //  emit(UserDataLoading());
+    bool isFirstEmission = true;
     sharedRepos.fetchUserData(id: id).listen((result) {
       result.fold(
         (failure) {
+          print(failure.errMessage);
           emit(UserDataFailure(failure.errMessage));
         },
         (user) {
+          print('here');
+          if (isFirstEmission) {
+            emit(UserDataLoading()); // Emit loading only once
+            isFirstEmission = false;
+          }
           emit(UserDataSuccess(user));
         },
       );
