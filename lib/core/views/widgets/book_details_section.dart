@@ -34,7 +34,9 @@ class BookDetailsSection extends StatelessWidget {
                 thickness: 2,
               ),
             ),
-            SimilarBooksBlocBuilder(),
+            SimilarBooksBlocBuilder(
+              currentBook: bookModel,
+            ),
           ],
         ),
       ),
