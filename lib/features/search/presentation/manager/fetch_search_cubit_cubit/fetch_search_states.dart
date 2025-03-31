@@ -2,16 +2,28 @@ import '../../../../../core/data/models/book_model/book_model.dart';
 
 sealed class FetchSearchBookStates {}
 
-final class FetchSearchInitial extends FetchSearchBookStates {}
+class FetchSearchInitial extends FetchSearchBookStates {}
 
-final class FetchSearchLoading extends FetchSearchBookStates {}
+class FetchSearchLoading extends FetchSearchBookStates {}
 
-final class FetchSearchSuccess extends FetchSearchBookStates {
+class FetchSearchSuccess extends FetchSearchBookStates {
   final List<BookModel> books;
   FetchSearchSuccess(this.books);
 }
 
-final class FetchSearchFailure extends FetchSearchBookStates {
+class FetchSearchFailure extends FetchSearchBookStates {
   final String errMessage;
   FetchSearchFailure(this.errMessage);
+}
+
+class FetchSearchLoadingPagination extends FetchSearchBookStates {
+  final List<BookModel> books;
+
+  FetchSearchLoadingPagination(this.books);
+}
+
+class FetchSearchFailurePagination extends FetchSearchBookStates {
+  final List<BookModel> books;
+  final String errMessage;
+  FetchSearchFailurePagination(this.errMessage, this.books);
 }
