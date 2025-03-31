@@ -10,6 +10,7 @@ class UserModel {
   final PreferencesModel? preferences;
   final List<String>? recentSearch;
   final List<SmallBookModel>? likedBooks;
+  final List<SmallBookModel>? recentlyViewed;
   final Map<String, List<SmallBookModel>>? readingList;
 
   const UserModel({
@@ -22,6 +23,7 @@ class UserModel {
     this.recentSearch,
     this.likedBooks,
     this.readingList,
+    this.recentlyViewed,
   });
 
   factory UserModel.fromMap(Map<String, dynamic> data) {
@@ -39,20 +41,25 @@ class UserModel {
               .toList() ??
           [],
       likedBooks: (data['likedBooks'] as List<dynamic>?)
-          ?.map((e) => SmallBookModel.fromJson(e))
+          ?.map((e) => SmallBookModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      recentlyViewed: (data['recentlyViewed'] as List<dynamic>?)
+              ?.map((item) =>
+                  SmallBookModel.fromJson(item as Map<String, dynamic>))
+              .toList() ??
+          [],
       readingList: {
         "Want to Read": (data['readingList']?["Want to Read"] as List<dynamic>?)
-                ?.map((e) => SmallBookModel.fromJson(e))
+                ?.map((e) => SmallBookModel.fromJson(e as Map<String, dynamic>))
                 .toList() ??
             [],
-        "Currently Reading":
-            (data['readingList']?["Currently Reading"] as List<dynamic>?)
-                    ?.map((e) => SmallBookModel.fromJson(e))
-                    .toList() ??
-                [],
+        "Currently Reading": (data['readingList']?["Currently Reading"]
+                    as List<dynamic>?)
+                ?.map((e) => SmallBookModel.fromJson(e as Map<String, dynamic>))
+                .toList() ??
+            [],
         "Finished": (data['readingList']?["Finished"] as List<dynamic>?)
-                ?.map((e) => SmallBookModel.fromJson(e))
+                ?.map((e) => SmallBookModel.fromJson(e as Map<String, dynamic>))
                 .toList() ??
             [],
       },
@@ -69,6 +76,8 @@ class UserModel {
       'preferences': preferences?.toJson(),
       'recentSearch': recentSearch,
       'likedBooks': likedBooks?.map((e) => e.toJson()).toList(),
+      'recentlyViewed':
+          recentlyViewed?.map((e) => e.toJson()).toList(), // ✅ Fixed
       'readingList': {
         "Want to Read":
             readingList?["Want to Read"]?.map((e) => e.toJson()).toList(),
