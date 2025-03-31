@@ -122,10 +122,31 @@ class AuthRepoImp implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> changePassword(
-      {required String currentPassword, required String newPassword}) {
-    // TODO: implement changePassword
-    throw UnimplementedError();
+  Future<Either<Failure, void>> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        AuthCredential credential = EmailAuthProvider.credential(
+          email: user.email!,
+          password: currentPassword,
+        );
+
+        await user.reauthenticateWithCredential(credential);
+
+        await user.updatePassword(newPassword);
+
+        return right(null);
+      }
+      return left(FirebaseFailure('No User Found'));
+    } on FirebaseAuthException catch (e) {
+      return left(FirebaseFailure.fromFirebaseAuthException(
+          e)); // Handling Firebase errors
+    } catch (e) {
+      return left(FirebaseFailure(e.toString()));
+    }
   }
 
   @override
@@ -143,8 +164,19 @@ class AuthRepoImp implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
+  Future<Either<Failure, void>> logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      await CacheHelper.removeData(key: 'uid');
+      await CacheHelper.setBoolean(key: 'islogged', value: false);
+
+      return right(null);
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        return left(FirebaseFailure.fromFirebaseAuthException(e));
+      } else {
+        return left(FirebaseFailure(e.toString()));
+      }
+    }
   }
 }
