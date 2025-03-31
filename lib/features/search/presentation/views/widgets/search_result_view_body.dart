@@ -128,7 +128,7 @@ class _PaginatedGridViewState extends State<PaginatedGridView> {
         return GestureDetector(
           onTap: () => navigatorPush(
             context,
-            BookDetailsView(book: widget.books[index]),
+            BookDetailsView(bookId: widget.books[index].id!),
           ),
           child: SquareBookItem(book: widget.books[index]),
         );

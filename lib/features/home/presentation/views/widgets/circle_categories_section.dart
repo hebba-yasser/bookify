@@ -6,9 +6,7 @@ import 'circle_category_list_view.dart';
 class CircleCategoriesSection extends StatelessWidget {
   const CircleCategoriesSection({
     super.key,
-    required this.collectionTitle,
   });
-  final String collectionTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +16,7 @@ class CircleCategoriesSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
           child: Text(
-            collectionTitle,
+            'Top Authors',
             style: AppFonts.heading20,
           ),
         ),

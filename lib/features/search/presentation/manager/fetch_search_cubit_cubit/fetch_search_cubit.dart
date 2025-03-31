@@ -61,9 +61,6 @@ class FetchSearchBookCubit extends Cubit<FetchSearchBookStates> {
         if (!loadMore) {
           await updateRecentSearchCubit.updateRecentSearch(search: query);
         }
-        for (var book in books) {
-          print(book.id);
-        }
         emit(FetchSearchSuccess(books));
       },
     );

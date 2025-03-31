@@ -28,7 +28,7 @@ class BooksListView extends StatelessWidget {
                   navigatorPush(
                       context,
                       BookDetailsView(
-                        book: books[index],
+                        bookId: books[index].id!,
                       ));
                 },
                 child: BookDetailsItem(

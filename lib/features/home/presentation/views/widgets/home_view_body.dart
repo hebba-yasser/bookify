@@ -17,12 +17,8 @@ class HomeViewBody extends StatelessWidget {
             children: [
               HomeAppBar(),
               NewArrivalBlocBuilder(),
-              CircleCategoriesSection(
-                collectionTitle: 'Top Authors',
-              ),
-              RecentlyViewedSection(
-                collectionTitle: 'Recently Viewed',
-              ),
+              CircleCategoriesSection(),
+              RecentlyViewedSection(),
             ],
           ),
         ),

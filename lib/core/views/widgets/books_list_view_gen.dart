@@ -65,7 +65,7 @@ class _BooksListViewGenState extends State<BooksListViewGen> {
                 navigatorPush(
                     context,
                     BookDetailsView(
-                      book: widget.books[index],
+                      bookId: widget.books[index].id!,
                     ));
               },
               child: BookListViewItem(
