@@ -1,11 +1,13 @@
 import 'package:bookify/constants.dart';
 import 'package:bookify/core/views/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/data/models/book_model/book_model.dart';
 import '../../../../../core/styles/fonts.dart';
-import '../../../../../core/views/widgets/books_grid_view.dart';
+import '../../../../../core/views/widgets/paginated_grid_view.dart';
 import '../../../data/models/author_model/author_model.dart';
+import '../../manager/fetch_books_by_author_name_cubit/fetch_books_by_author_name_cubit.dart';
 import 'author_info_section.dart';
 
 class AuthorBooksViewBody extends StatelessWidget {
@@ -38,13 +40,16 @@ class AuthorBooksViewBody extends StatelessWidget {
             color: kPrimaryColor,
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: BooksGridView(
-                books: books,
-              ),
+            child: PaginatedGridView(
+              books: books,
+              onLoadMore: () async {
+                await BlocProvider.of<FetchBooksByAuthorNameCubit>(context)
+                    .fetchBooksByAuthorName(
+                        loadMore: true, authorName: author.authorName);
+              },
+              noItemsFoundWidget: const Center(child: Text('No books found')),
             ),
-          )
+          ),
         ],
       ),
     );
