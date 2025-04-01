@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -25,7 +26,7 @@ class HomeView extends StatelessWidget {
             final cubit = BlocProvider.of<BottomNavigationCubit>(context);
 
             return BottomNavigationBar(
-              backgroundColor: Colors.red,
+              backgroundColor: CupertinoColors.systemGrey5,
               items: [
                 BottomNavigationBarItem(
                     icon: Icon(FontAwesomeIcons.bookOpenReader), label: 'Home'),
@@ -34,22 +35,22 @@ class HomeView extends StatelessWidget {
                       FontAwesomeIcons.magnifyingGlass,
                     ),
                     label: 'search'),
-                const BottomNavigationBarItem(
-                    icon: Icon(FontAwesomeIcons.bookOpen), label: 'Library'),
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.explore), label: 'Explore'),
+                // const BottomNavigationBarItem(
+                //     icon: Icon(FontAwesomeIcons.bookOpen), label: 'Library'),
+                // const BottomNavigationBarItem(
+                //     icon: Icon(Icons.explore), label: 'Explore'),
                 const BottomNavigationBarItem(
                     icon: Icon(Icons.person), label: 'Profile'),
               ],
-              currentIndex: cubit.currentIndex,
-              onTap: (index) {
-                cubit.changeBottomNav(index);
-              },
               showSelectedLabels: true,
               showUnselectedLabels: true,
               elevation: 20,
               selectedItemColor: kPrimaryColor,
               unselectedItemColor: Colors.black54,
+              currentIndex: cubit.currentIndex,
+              onTap: (index) {
+                cubit.changeBottomNav(index);
+              },
             );
           },
         ),
