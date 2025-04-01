@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/utils/functions/custom_loading_indicator.dart';
 import '../../manager/fetch_new_arrival_book_cubit/fetch_new_arrival_book_cubit.dart';
 import '../../manager/fetch_new_arrival_book_cubit/fetch_new_arrival_book_states.dart';
 import 'books_section.dart';
+import 'new_arrival_loading.dart';
 
 class NewArrivalBlocBuilder extends StatelessWidget {
   const NewArrivalBlocBuilder({
@@ -28,7 +28,7 @@ class NewArrivalBlocBuilder extends StatelessWidget {
           ),
         );
       } else {
-        return customLoadingIndicator();
+        return NewArrivalLoading();
       }
     });
   }

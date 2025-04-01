@@ -81,3 +81,32 @@ class RecentlyViewedBlocBuilder extends StatelessWidget {
     );
   }
 }
+// class recentlyViewedLoading extends StatelessWidget {
+//   const recentlyViewedLoading({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: 200,
+//       child: ListView.builder(
+//           physics: const BouncingScrollPhysics(),
+//           itemCount: 5,
+//           scrollDirection: Axis.horizontal,
+//           itemBuilder: (context, index) {
+//             return Padding(
+//               padding: const EdgeInsets.only(left: 12, top: 0, bottom: 0),
+//               child: Skeletonizer(
+//                 child: Container(
+//                   width: 120,
+//                   height: 180,
+//                   decoration: BoxDecoration(
+//                     color: AppColors.lightGrey,
+//                     borderRadius: BorderRadius.circular(12),
+//                   ),
+//                 ),
+//               ),
+//             );
+//           }),
+//     );
+//   }
+// }
