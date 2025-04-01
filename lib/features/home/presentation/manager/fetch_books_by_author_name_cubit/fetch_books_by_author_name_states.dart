@@ -17,3 +17,17 @@ final class FetchBooksByAuthorNameFailure extends FetchBooksByAuthorNameStates {
   final String errMessage;
   FetchBooksByAuthorNameFailure(this.errMessage);
 }
+
+class FetchBooksByAuthorNameLoadingPagination
+    extends FetchBooksByAuthorNameStates {
+  final List<BookModel> books;
+
+  FetchBooksByAuthorNameLoadingPagination(this.books);
+}
+
+class FetchBooksByAuthorNameFailurePagination
+    extends FetchBooksByAuthorNameStates {
+  final List<BookModel> books;
+  final String errMessage;
+  FetchBooksByAuthorNameFailurePagination(this.errMessage, this.books);
+}
