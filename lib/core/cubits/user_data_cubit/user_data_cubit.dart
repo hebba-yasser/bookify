@@ -8,7 +8,7 @@ class UserDataCubit extends Cubit<UserDataState> {
 
   UserDataCubit(this.sharedRepos) : super(UserDataInitial());
 
-  void fetchUserData({required String id}) {
+  Future<void> fetchUserData({required String id}) async {
     //  emit(UserDataLoading());
     bool isFirstEmission = true;
     sharedRepos.fetchUserData(id: id).listen((result) {
